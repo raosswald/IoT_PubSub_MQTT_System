@@ -1,7 +1,7 @@
 # IoT_PubSub_MQTT_System
 Demo system for IoT System using MQTT, a RaspberryPi, SenseHat, and Wio Terminal
 
-![Screenshot](SnapShot.png)
+![Screenshot](Resources/SnapShot.png)
 [Video Demo Youtube](https://www.youtube.com/watch?v=bJO3hYRXezg)
 
 ---
