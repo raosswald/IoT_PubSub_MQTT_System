@@ -4,14 +4,19 @@
 
 // Declare Global Variables
 TFT_eSPI tft;
-const char* ssid = "SSIDHERE";
-const char* password = "PASSWORDHERE";
+const char* ssid = "REPLACESSID";
+const char* password = "REPLACE PASSWORD";
+const int tempY = 100;
 
 // MQTT Variables
 const char *ID = "Wio-Terminal-Client";
 const char *TOPIC = "LEDControl";
 const char *subTopic = "Temperature";
 const char *server = "TestBedRpi";
+
+
+String LastMssg = "";
+
 
 WiFiClient wifiClient;
 PubSubClient client(wifiClient);
@@ -28,6 +33,10 @@ void bgRefresh() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
+  // Set last message in white to clear screen on Message Received
+  tft.setTextColor(TFT_WHITE);
+  tft.drawString(LastMssg, 5, tempY);
+
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
@@ -37,9 +46,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
     mssg += (char)payload[i];
   }
   Serial.println(mssg);
-  bgRefresh();
   tft.setTextColor(TFT_BLACK);
-  tft.drawString(mssg, 5, 50);
+  tft.drawString(mssg, 5, tempY);
+  LastMssg = mssg;
 
 }
 
@@ -101,11 +110,13 @@ void setup() {
 
   tft.setTextColor(TFT_RED);
   tft.setTextSize(2);
-  tft.drawString("Red", 5, 0);
+  tft.drawString("Red", 5, 2);
   tft.setTextColor(TFT_GREEN);
-  tft.drawString("Green", 60, 0);
+  tft.drawString("Green", 60, 2);
   tft.setTextColor(TFT_BLUE);
-  tft.drawString("Blue", 150, 0);
+  tft.drawString("Blue", 150, 2);
+  tft.setTextColor(TFT_BLACK);
+  tft.drawString("Temperature in Celsius:", 5, 60);
 
   // Setup Buttons
   pinMode(WIO_KEY_A, INPUT_PULLUP); //Rightmost button
