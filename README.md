@@ -19,6 +19,9 @@ Next, I got the Wio Terminal Set Up to connect to the same Wifi network that my 
 
 I wanted to make a full loop for communication between the Wio Terminal and Raspberry Pi, so I also set up the Wio Terminal to subscribe to the topic "Temperature". When a new message was published to the "Temperature" topic by the Raspberry Pi. The Wio Terminal would update it's display of the temperature. 
 
+## Data Flow Diagram
+![Data Flow Diagram](Resources/MQTT_Data_Flow_Diagram.png)
+
 ---
 ## Required Materials (If interested in building yourself)
 | Hardware | Approximate Cost | Link |
